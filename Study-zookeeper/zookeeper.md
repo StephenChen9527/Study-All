@@ -30,9 +30,46 @@ zk=文件系统+监听通知机制，本质zk是用来存储一部分数据，�
 3. 数据节点：
 
    1. 构成集群的机器（各个节点）
-   2. 构成内存数据中的最小单元（数据结构）：被称为`ZNode`，zk将所有数据存储与内存中，数据结构是一颗树，
+   2. 构成内存数据中的最小单元（数据结构）：被称为`ZNode`，zk将所有数据存储与内存中，数据结构是一颗树。对于每个ZNode，zk都会维护一个叫做`Stat`的数据结构，该结构记录了ZNode的三个数据版本：
+      1. version：当前ZNode的版本
+      2. cversion：当ZNode子节点的版本
+      3. aversion：当前ZNode的ACL版本
 
-   https://www.cnblogs.com/leesf456/p/6012777.html
+   
+
+4. Watcher：zk允许客户端再指定节点注册一些Watcher，并且当特定的时间触发的时候，zk会通知注册监听的客户端（且注册监听是一次有效性）
+
+5. ACL：zk采用ACL（Access Control List）策略来进行权限控制，主要有以下几种（JAVA API中的ACL不是这些）：
+
+   1. CREATE：创建节点的权限
+   2. READ：获取节点数据和子节点列表的权限
+   3. WRITE：更新节点数据的权限
+   4. DELETE：删除子节点的权限
+   5. ADMIN：设置节点ACL的权限
+
+
+
+zk的运行状态：
+
+1. LOOKING：leader选举状态
+2. FOLLOWING：Follower与Leader服务器保持同步状态
+3. LEADING：Leader服务器领导状态
+
+zk端口：
+
+1. 对外服务端口：2181可配置
+2. zk各节点间通信节点：2888，用于节点数据同步
+3. zk选举使用的节点：3888，用于节点选举通信
+
+zk的端口除了对外是在配置文件的`port=2181`，其他端口则是配置成集群时，需要进行在配置文件中写出，单机情况不需要写2跟3配置
+
+#### zk中协议
+
+zk使用`ZAB`协议（Zookeeper Atomic Broadcast ：zk原子消息广播协议）
+
+https://www.cnblogs.com/leesf456/p/6012777.html
+
+
 
 #### zk部署方式
 
