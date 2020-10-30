@@ -36,7 +36,7 @@ public class ZKClientUtils {
         }
         try {
             zkClient = new ZooKeeper(host,sessionTimeOut,watcher==null?(watchedEvent)->{
-                System.out.println("process");
+                System.out.println("监控器被触发!触发的路径为："+watchedEvent.getPath());
             }:watcher);
             //由于连接为异步请求，部分版本存在连接初始化较为缓慢，
             //因此需要等待
@@ -51,60 +51,6 @@ public class ZKClientUtils {
     }
 
 
-    public String create(String path, byte[] data, List<ACL> acl, CreateMode createMode){
-        try {
-            return zkClient.create(path, data, acl, createMode);
-        } catch (KeeperException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
-    public Stat exists(String path,boolean watch){
-        try {
-            return  zkClient.exists(path, watch);
-        } catch (KeeperException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<String> getChild(String path,boolean watch){
-        try {
-            return zkClient.getChildren(path,watch );
-        } catch (KeeperException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
-    public Stat update(String path,byte[] data,int version){
-        try {
-            return  zkClient.setData(path,data , version);
-        } catch (KeeperException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public byte[] getData(String path,boolean watch,Stat stat){
-        try {
-            return zkClient.getData(path,watch ,stat );
-        } catch (KeeperException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
 }
