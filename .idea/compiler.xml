@@ -6,7 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Study-zookeeper" />
+        <module name="Study-ZooKeeper" />
+        <module name="Study-Redis" />
       </profile>
     </annotationProcessing>
   </component>
