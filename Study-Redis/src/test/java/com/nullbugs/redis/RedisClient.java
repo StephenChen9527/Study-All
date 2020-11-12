@@ -2,7 +2,7 @@ package com.nullbugs.redis;
 
 import org.junit.Before;
 import org.junit.Test;
-import redis.clients.jedis.Jedis;
+import redis.clients.jedis.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,5 +58,29 @@ public class RedisClient {
     public void hgetallTest(){
         Map<String, String> user = jedis.hgetAll("user");
         System.out.println(user);
+    }
+
+    @Test
+    public void testGoe(){
+        jedis.geoadd("zhengzhou",1.1,121,"zhongyuanqu");
+
+    }
+
+
+    @Test
+    public void testMulit(){
+        jedis.watch("a");
+        Transaction multi = jedis.multi();
+        try {
+            Response<String> set = multi.set("a", "b");
+            multi.set("b","c");
+            multi.exec();
+        } catch (Exception e) {
+            jedis.unwatch();
+            multi.discard();
+            e.printStackTrace();
+        }finally {
+
+        }
     }
 }
