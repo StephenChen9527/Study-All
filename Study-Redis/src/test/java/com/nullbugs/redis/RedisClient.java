@@ -10,14 +10,12 @@ import java.util.Map;
 public class RedisClient {
 
 
-    private String host = "49.232.122.106";
+    private String host = "127.0.0.1";
     private int port = 6379 ;
-    private String password= "hello123";
     private Jedis jedis;
     @Before
     public void init(){
         jedis = new Jedis(host,port );
-        jedis.auth(password);
     }
 
     @Test
@@ -63,7 +61,6 @@ public class RedisClient {
     @Test
     public void testGoe(){
         jedis.geoadd("zhengzhou",1.1,121,"zhongyuanqu");
-
     }
 
 
@@ -80,7 +77,9 @@ public class RedisClient {
             multi.discard();
             e.printStackTrace();
         }finally {
-
+            jedis.unwatch();
         }
     }
+
+
 }
