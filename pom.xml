@@ -10,6 +10,9 @@
     <modules>
         <module>Study-zookeeper</module>
         <module>Study-Redis</module>
+        <module>Study-Spring</module>
+        <module>Study-JSR</module>
+        <module>JSR-340</module>
     </modules>
     <packaging>pom</packaging>
     <dependencies>
