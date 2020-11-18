@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    <bean id="constructTest" class="com.nullbugs.spring.context.xml.pojo.ConstructTest">
+        <constructor-arg type="int" value="1"></constructor-arg>
+        <constructor-arg type="java.lang.String" value="2"></constructor-arg>
+    </bean>
+    -->
+
+    <!--
+    <bean id="constructTest" class="com.nullbugs.spring.context.xml.pojo.ConstructTest">
+        <constructor-arg index="0" value="1"></constructor-arg>
+        <constructor-arg index="1" value="2"></constructor-arg>
+    </bean>
+    -->
+    <bean id="constructTest" class="com.nullbugs.spring.context.xml.pojo.ConstructTest">
+        <constructor-arg name="x" value="1"></constructor-arg>
+        <constructor-arg name="y" value="2"></constructor-arg>
+    </bean>
+
+
+    <bean id="setterTest" class="com.nullbugs.spring.context.xml.pojo.SetterTest">
+        <property name="x" value="1" ></property>
+        <property name="y" value="2"></property>
+    </bean>
+</beans>

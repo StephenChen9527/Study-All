@@ -568,6 +568,54 @@ set a c
 
 Redis 4.0以后支持混合持久化
 
+## Redis过期策略
+
+Redis中可以为key设置有效期，当有效期过了之后，并不是立即删除。
+
+* volatile-lru -> Evict using approximated LRU among the keys with an expire set.从设置有效期的key中删除一个最久未使用的
+
+* allkeys-lru -> Evict any key using approximated LRU.从所有的key中删除一个最久未使用的
+
+* volatile-lfu -> Evict using approximated LFU among the keys with an expire set.从设置有效期的key中删除一个使用最少的
+
+* allkeys-lfu -> Evict any key using approximated LFU. 从所有key中删除一个最少使用的
+
+* volatile-random -> Remove a random key among the ones with an expire set.随机删除一个带有过期时间的key
+
+* allkeys-random -> Remove a random key, any key.从所有的key中进行随机删除
+
+* volatile-ttl -> Remove the key with the nearest expire time (minor TTL) 删除一个最接近过期时间的key
+
+* noeviction -> Don't evict anything, just return an error on write operations. 不进行删除，写的时候返回错误
+
+FIFI、LRU、LFU算法：
+
+https://www.cnblogs.com/hongdada/p/10406902.html
+
+### 定期删除
+
+Redis会为每个设置了过期时间的key放入一个独立的集合中，以后会定期遍历进行删除到期的key。
+
+默认每秒10次过期扫描，扫描过程并不会遍历所有的key，而是是采用了一种简单的贪心策略：
+
+1. 从过期字典中随机 20 个 key；
+
+2. 删除这 20 个 key 中已经过期的 key；
+
+3. 如果过期的 key 比率超过 1/4，那就重复步骤 1；
+
+### 惰性删除
+
+惰性删除即在客户端访问这个key的时候，redis对key的过期时间进行检查，如果过期了就立即删除，并返回空。
+
+## Redis内存淘汰策略
+
+因为缓存大部分都不能过期立即删除，那么就可能存在部分key过期了，还存在内存中，导致内存爆满，因此需要内存淘汰策略：
+
+
+
+
+
 ## 16384槽位
 
 https://github.com/redis/redis/commit/ebd666d
