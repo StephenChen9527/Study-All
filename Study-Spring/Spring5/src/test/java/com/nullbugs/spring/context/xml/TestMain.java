@@ -2,6 +2,7 @@ package com.nullbugs.spring.context.xml;
 
 import com.nullbugs.spring.context.xml.beanPostProcessor.BeanTest;
 import com.nullbugs.spring.context.xml.beanPostProcessor.BeanTest2;
+import com.nullbugs.spring.context.xml.beanPostProcessor.MyDataSource;
 import com.nullbugs.spring.context.xml.ext.Parent;
 import com.nullbugs.spring.context.xml.ext.Son;
 import com.nullbugs.spring.context.xml.pojo.*;
@@ -176,4 +177,28 @@ public class TestMain {
 
     }
 
+    @Test
+    public void testProperties(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("com.nullbugs.spring.context.xml\\application-properties.xml");
+
+        //System.out.println("----------");
+        //BeanTest2 testBean = context.getBean("testBean2", BeanTest2.class);
+
+    }
+
+    /**
+     * beanFactory 后置处理器
+     */
+    @Test
+    public void testPropertiesOver(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("com.nullbugs.spring.context.xml\\application-override.xml");
+        MyDataSource bean = context.getBean(MyDataSource.class);
+        System.out.println(bean.getUrl());
+        System.out.println(bean.getUsername());
+        System.out.println(bean.getPassword());
+
+        //System.out.println("----------");
+        //BeanTest2 testBean = context.getBean("testBean2", BeanTest2.class);
+
+    }
 }

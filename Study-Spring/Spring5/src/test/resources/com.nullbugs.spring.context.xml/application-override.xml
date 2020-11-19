@@ -4,12 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.nullbugs.spring.context.xml.beanPostProcessor.BeanTest" id="bean1" >
-    </bean>
 
-    <bean class="com.nullbugs.spring.context.xml.beanPostProcessor.BeanTest2" id="bean2">
+    <bean class="com.nullbugs.spring.context.xml.beanPostProcessor.MyDataSource" id="dataSource">
 
     </bean>
-    <bean class="com.nullbugs.spring.context.xml.beanPostProcessor.BeanFactoryProcess" id="beanFactoryProcess"></bean>
+
+    <bean class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
+        <property name="location" value="classpath:jdbc2.properties"></property>
+    </bean>
 
 </beans>
