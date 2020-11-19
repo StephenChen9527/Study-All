@@ -1,5 +1,9 @@
 package com.nullbugs.spring.context.xml;
 
+import com.nullbugs.spring.context.xml.beanPostProcessor.BeanTest;
+import com.nullbugs.spring.context.xml.beanPostProcessor.BeanTest2;
+import com.nullbugs.spring.context.xml.ext.Parent;
+import com.nullbugs.spring.context.xml.ext.Son;
 import com.nullbugs.spring.context.xml.pojo.*;
 import com.nullbugs.spring.context.xml.scop.Controller1;
 import org.junit.Test;
@@ -147,4 +151,29 @@ public class TestMain {
         TimeUnit.DAYS.sleep(1);
 
     }
+
+    @Test
+    public void testExt(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("com.nullbugs.spring.context.xml\\application-ext.xml");
+        Son s = context.getBean(Son.class);
+        System.out.println(s.getName());
+        System.out.println(s.getAge());
+    }
+
+    /**
+     * 注意，实现扩展点是对其他bean处理的，并不是对自己的bean处理的
+     */
+    @Test
+    public void testBeanProcess(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("com.nullbugs.spring.context.xml\\application-process.xml");
+        BeanTest bean = context.getBean(BeanTest.class);
+
+
+
+
+        //System.out.println("----------");
+        //BeanTest2 testBean = context.getBean("testBean2", BeanTest2.class);
+
+    }
+
 }
