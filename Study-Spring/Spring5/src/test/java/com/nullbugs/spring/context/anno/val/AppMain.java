@@ -15,9 +15,6 @@ public class AppMain {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppMain.class);
-        DataSource1 da = context.getBean(DataSource1.class);
-        System.out.println(da.getUrl());
-        System.out.println(da.getUsername());
-        System.out.println(da.getPassword());
+
     }
 }

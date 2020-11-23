@@ -6,6 +6,7 @@ import com.nullbugs.spring.context.xml.beanPostProcessor.MyDataSource;
 import com.nullbugs.spring.context.xml.ext.Parent;
 import com.nullbugs.spring.context.xml.ext.Son;
 import com.nullbugs.spring.context.xml.pojo.*;
+import com.nullbugs.spring.context.xml.res.ResTest;
 import com.nullbugs.spring.context.xml.scop.Controller1;
 import org.junit.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.support.ChildBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.Resource;
 
 import java.util.concurrent.*;
 
@@ -199,6 +201,15 @@ public class TestMain {
 
         //System.out.println("----------");
         //BeanTest2 testBean = context.getBean("testBean2", BeanTest2.class);
+
+    }
+
+    @Test
+    public void testResource()throws Exception{
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("com.nullbugs.spring.context.xml\\application-res.xml");
+        ResTest bean = context.getBean(ResTest.class);
+        Resource r= bean.getResource();
+        System.out.println(r.contentLength());
 
     }
 }

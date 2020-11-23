@@ -1,4 +1,4 @@
-package com.nullbugs.spring.context.anno;
+package com.nullbugs.spring.context.anno.pojo;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
