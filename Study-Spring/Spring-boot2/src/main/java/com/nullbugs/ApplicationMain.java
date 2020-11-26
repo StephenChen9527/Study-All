@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
@@ -33,7 +34,7 @@ public class ApplicationMain {
     }
 
     @RequestMapping(value = "/bt")
-    public void getS(@Validated Student stu, BindResult result){
+    public void getS(@Validated Student stu){
 
         System.out.println(stu);
     }
