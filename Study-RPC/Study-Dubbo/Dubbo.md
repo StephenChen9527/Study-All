@@ -43,8 +43,6 @@
 
 基于API的启动
 
-各种config配置，感觉ProviderConfig与ServiceConfig部分配置会重合
-
 ![image-20201126220158674](img/image-20201126220158674.png)
 
 基于API的配置主要有以下几个配置选项：

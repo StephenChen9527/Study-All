@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface IDubboService {
 
-    String getInfo(String id);
+    String getInfo(String id)throws Exception;
 }
