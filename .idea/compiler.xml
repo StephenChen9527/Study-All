@@ -6,13 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Study-Dubbo" />
         <module name="Study-ZooKeeper" />
         <module name="Spring5" />
         <module name="JSR-340" />
         <module name="Spring-boot2" />
+        <module name="Study-Dubbo-springboot" />
         <module name="Study-Redis" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel target="8">
+      <module name="Study-Dubbo-springboot" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

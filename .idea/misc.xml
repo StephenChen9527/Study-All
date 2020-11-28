@@ -13,6 +13,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/JSR-340/pom.xml" />
+        <option value="$PROJECT_DIR$/Study-RPC/Study-Dubbo-springboot/pom.xml" />
       </set>
     </option>
   </component>

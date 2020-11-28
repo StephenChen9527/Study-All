@@ -12,7 +12,7 @@
         <module>Study-Redis</module>
         <module>Study-Spring</module>
         <module>Study-JSR</module>
-        <module>JSR-340</module>
+        <module>Study-RPC</module>
     </modules>
     <packaging>pom</packaging>
     <dependencies>
@@ -23,4 +23,19 @@
             <version>4.12</version>
         </dependency>
     </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
