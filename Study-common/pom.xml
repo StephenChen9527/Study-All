@@ -9,13 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Study-RPC</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>Study-Dubbo</module>
-        <module>Study-Dubbo-SpringBoot-Provider</module>
-        <module>Study-Dubbo-SpringBoot-Consumer</module>
-    </modules>
+    <artifactId>Study-common</artifactId>
 
 
 </project>

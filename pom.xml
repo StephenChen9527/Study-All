@@ -13,6 +13,7 @@
         <module>Study-Spring</module>
         <module>Study-JSR</module>
         <module>Study-RPC</module>
+        <module>Study-common</module>
     </modules>
     <packaging>pom</packaging>
     <dependencies>
