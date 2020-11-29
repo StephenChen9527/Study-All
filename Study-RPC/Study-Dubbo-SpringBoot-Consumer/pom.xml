@@ -11,17 +11,29 @@
 
     <artifactId>Study-Dubbo-SpringBoot-Consumer</artifactId>
     <dependencies>
+        <!--
+            spring cloud 2.2.1 的Hystrix 依赖 2.2.2 的spring boot，无奈从 2.4.0 降级，
+            但是 从Spring cloud 引入的  Hystrix 的 jackson-databind 是 2.7.5
+            Spring web 里面的依赖  json starter 里面是 的 databind 2.10.1
+            只能指定版本了...
+         -->
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>2.4.0</version>
+            <version>2.2.2.RELEASE</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.4.0</version>
+            <version>2.2.2.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.7.5</version>
         </dependency>
 
         <!-- Dubbo Spring Boot Starter -->
@@ -47,6 +59,14 @@
             <artifactId>curator-recipes</artifactId>
             <version>2.13.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-hystrix -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <version>2.2.1.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
 </project>
