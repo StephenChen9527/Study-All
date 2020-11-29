@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Study-Dubbo-SpringBoot</artifactId>
+    <artifactId>Study-Dubbo-SpringBoot-Provider</artifactId>
 
 
     <dependencies>
