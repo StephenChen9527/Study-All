@@ -2,6 +2,7 @@ package com.nullbugs.nospring;
 
 import com.nullbugs.nospring.service.MyService;
 import org.apache.dubbo.config.*;
+import org.apache.dubbo.config.spring.ServiceBean;
 
 /**
  * 服务消费者

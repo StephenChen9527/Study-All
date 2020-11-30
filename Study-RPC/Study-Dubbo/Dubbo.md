@@ -104,6 +104,8 @@
 
 ### 服务暴露过程
 
+![image-20201130220353964](img/image-20201130220353964.png)
+
 1. 容器启动，创建一个ServiceConfig，然后获取到对外服务的实际类Ref（我们的业务代码），然后通过ProxyFactory类的getInvoker方法生成一个服务代理类
 2. DubboProtocol类拿到服务代理类，再通过一层包装，将Invoker转换成exporter，然后启动服务，监听端口
 3. Register类将映射关系，地址信息等注册到配置中心
