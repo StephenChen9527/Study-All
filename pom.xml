@@ -14,6 +14,7 @@
         <module>Study-JSR</module>
         <module>Study-RPC</module>
         <module>Study-common</module>
+        <module>Study-ORM</module>
     </modules>
     <packaging>pom</packaging>
     <dependencies>

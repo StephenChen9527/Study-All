@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nullbugs.mybatis.mapper.PersonMapper">
+    <select id="selectPerson" resultMap="person" >
+    select * from s_person where id = #{id}
+  </select>
+
+    <insert id="savePerson" parameterType="com.nullbugs.mybatis.pojo.Person">
+        insert into s_person (name,age,sex,desci,pwd,my)
+        values
+        (#{name},
+        #{age},
+        #{sex},
+        #{desci,typeHandler=com.nullbugs.mybatis.handler.JsonHandler},
+        #{pwd,typeHandler=com.nullbugs.mybatis.handler.PassWordByteHandler},
+        #{my,typeHandler=com.nullbugs.mybatis.handler.MYHandler})
+    </insert>
+
+    <resultMap id="person" type="com.nullbugs.mybatis.pojo.Person">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="age" property="age"></result>
+        <result column="sex" property="sex"></result>
+        <result column="desci" property="desci" typeHandler="com.nullbugs.mybatis.handler.JsonHandler"></result>
+        <result column="pwd" property="pwd" typeHandler="com.nullbugs.mybatis.handler.PassWordByteHandler"></result>
+        <result column="my" property="my" typeHandler="com.nullbugs.mybatis.handler.MYHandler"></result>
+
+    </resultMap>
+</mapper>

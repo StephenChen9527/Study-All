@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 需要按照一定顺序配置 -->
+    <properties resource="jdbc.properties">
+        <property name="jdbc.driver" value="com.mysql.jdbc.Driver"/>
+    </properties>
+
+    <typeHandlers>
+
+        <typeHandler handler="com.nullbugs.mybatis.handler.JsonHandler"></typeHandler>
+        <typeHandler handler="com.nullbugs.mybatis.handler.PassWordByteHandler"></typeHandler>
+        <package name="com.nullbugs.mybatis.handler"/>
+    </typeHandlers>
+
+    <environments default="develop">
+        <environment id="develop">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+
+    </environments>
+
+    <mappers>
+        <mapper resource="mapper/PersonMapper.xml"></mapper>
+    </mappers>
+
+
+
+</configuration>

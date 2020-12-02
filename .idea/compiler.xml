@@ -13,6 +13,8 @@
         <module name="Spring-boot2" />
         <module name="Study-Dubbo-springboot" />
         <module name="Study-common" />
+        <module name="Study-Mybatis" />
+        <module name="Study-MyBatis" />
         <module name="Study-Dubbo-SpringBoot-Provider" />
         <module name="Study-Dubbo-SpringBoot-Consumer" />
         <module name="Study-Redis" />
@@ -20,6 +22,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="Study-Dubbo-springboot" target="1.8" />
+      <module name="Study-Mybatis" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

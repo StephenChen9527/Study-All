@@ -4,6 +4,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.nullbugs.dubbo.Service.IDubboService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.Method;
+import org.apache.dubbo.config.spring.ServiceBean;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -38,6 +39,7 @@ public class DubboConsumerApplication {
     }
 
     public String mock(String id){
+
         return "error";
     }
 }
