@@ -8,6 +8,7 @@
         <property name="jdbc.driver" value="com.mysql.jdbc.Driver"/>
     </properties>
 
+
     <typeHandlers>
 
         <typeHandler handler="com.nullbugs.mybatis.handler.JsonHandler"></typeHandler>
@@ -15,6 +16,10 @@
         <package name="com.nullbugs.mybatis.handler"/>
     </typeHandlers>
 
+    <plugins>
+        <plugin interceptor="com.nullbugs.mybatis.plugs.ExecutorPlugs"></plugin>
+        <plugin interceptor="com.nullbugs.mybatis.plugs.ResultSetPlug"></plugin>
+    </plugins>
     <environments default="develop">
         <environment id="develop">
             <transactionManager type="JDBC"></transactionManager>

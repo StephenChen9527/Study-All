@@ -38,7 +38,7 @@ public class MyBatisConfig {
     public void testQuery()  {
         // 方法1 这里需要命名空间与接口一致，这样可以动态生成子类，
         PersonMapper mapper = session.getMapper(PersonMapper.class);
-        Person o = mapper.selectPerson(17);
+        Person o = mapper.selectPerson(20);
         //方法2 通过 namespace+id 调用
         //Person o = session.selectOne("com.nullbugs.mybatis.mapper.PersonMapper.selectPerson", 1);
         System.out.println(o);
