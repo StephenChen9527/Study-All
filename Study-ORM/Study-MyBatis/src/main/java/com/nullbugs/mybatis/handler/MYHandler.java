@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @MappedTypes(MYHandler.class)
+@MappedJdbcTypes(JdbcType.VARCHAR)
 public class MYHandler extends BaseTypeHandler<String> {
 
     @Override
