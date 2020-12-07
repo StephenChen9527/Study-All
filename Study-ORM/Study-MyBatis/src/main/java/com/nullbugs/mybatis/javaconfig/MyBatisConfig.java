@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import javax.sql.DataSource;
 import java.io.InputStream;
+import java.util.*;
 
 public class MyBatisConfig {
 
@@ -62,6 +63,36 @@ public class MyBatisConfig {
         int i = mapper.savePerson(o);
         System.out.println(i);
         session.commit();
+    }
+
+    @Test
+    public void test1(){
+        System.out.println(UUID.randomUUID().toString().replace("-","").length());
+    }
+
+    @Test
+    public void batchSaveStu(){
+
+        Random ran = new Random();
+        for (int j = 0; j < 50; j++) {
+            List<Map<String,Object>> list = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                Map<String,Object> map = new HashMap<>();
+                String uuid = UUID.randomUUID().toString().replace("-", "");
+                map.put("name",uuid.substring(0,6));
+                map.put("sex",ran.nextInt()%2==0?"X":"Y");
+                map.put("age", ran.nextInt(15)+10);
+                map.put("address",uuid.substring(6,16));
+                map.put("pwd",uuid.substring(17,27));
+                list.add(map);
+            }
+            session.insert("com.nullbugs.mybatis.mapper.StudentMapper.batchSaveStu",list);
+            session.commit();
+
+        }
+
+        session.close();
+
     }
 
 }

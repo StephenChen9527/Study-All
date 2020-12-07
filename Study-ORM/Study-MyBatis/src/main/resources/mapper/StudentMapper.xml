@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nullbugs.mybatis.mapper.StudentMapper">
+
+
+    <insert id="batchSaveStu" parameterType="java.util.List">
+        insert into s_student (name,sex,age,address,pwd)
+        values
+        <foreach collection="list" item="it" separator=",">
+            (#{it.name},#{it.sex},#{it.age},#{it.address},#{it.pwd})
+        </foreach>
+
+    </insert>
+</mapper>
