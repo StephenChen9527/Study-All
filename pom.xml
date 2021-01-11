@@ -15,6 +15,7 @@
         <module>Study-RPC</module>
         <module>Study-common</module>
         <module>Study-ORM</module>
+        <module>Study-Proxy</module>
     </modules>
     <packaging>pom</packaging>
     <dependencies>

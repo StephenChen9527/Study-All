@@ -8,16 +8,18 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Study-Dubbo" />
         <module name="Study-ZooKeeper" />
-        <module name="Spring5" />
         <module name="JSR-340" />
-        <module name="Spring-boot2" />
-        <module name="Study-Dubbo-springboot" />
         <module name="Study-common" />
+        <module name="Study-MySQL" />
         <module name="Study-Mybatis" />
         <module name="Study-MyBatis" />
-        <module name="Study-Dubbo-SpringBoot-Provider" />
+        <module name="Study-Proxy" />
         <module name="Study-Dubbo-SpringBoot-Consumer" />
         <module name="Study-Redis" />
+        <module name="Spring5" />
+        <module name="Spring-boot2" />
+        <module name="Study-Dubbo-springboot" />
+        <module name="Study-Dubbo-SpringBoot-Provider" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">

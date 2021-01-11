@@ -150,6 +150,10 @@ set是一个集合，自动除重
 * **ZRANK key member**
   1. 返回排名，升序排列
 
+#### 数据结构
+
+跳表
+
 ## 特殊数据类型
 
 ### bitmaps
@@ -447,7 +451,7 @@ redis-cli --cluster create --cluster-replicas 1 127.0.0.1:7000 127.0.0.1:7001 12
 节点间通信，按照通信协议可以分为几种类型：单对单、广播、Gossip 协议等。重点是广播和 Gossip 的对比。
 
 - 广播是指向集群内所有节点发送消息。**优点** 是集群的收敛速度快(集群收敛是指集群内所有节点获得的集群信息是一致的)，**缺点** 是每条消息都要发送给所有节点，CPU、带宽等消耗较大。
-- Gossip 协议的特点是：在节点数量有限的网络中，**每个节点都 “随机” 的与部分节点通信** *（并不是真正的随机，而是根据特定的规则选择通信的节点）\*，经过一番杂乱无章的通信，每个节点的状态很快会达到一致。Gossip 协议的 **优点** 有负载 \*(比广播)* 低、去中心化、容错性高 *(因为通信有冗余)* 等；**缺点** 主要是集群的收敛速度慢。
+- Gossip 协议的特点是：在节点数量有限的网络中，**每个节点都 “随机” 的与部分节点通信** *（并不是真正的随机，而是根据特定的规则选择通信的节点）\*，经过一番杂乱无章的通信，每个节点的状态很快会达到一致。Gossip 协议的 **优点*** 有负载 **(比广播)** 低、去中心化、容错性高 *(因为通信有冗余)* 等；**缺点** 主要是集群的收敛速度慢。
 
 #### 消息类型
 
@@ -568,29 +572,7 @@ set a c
 
 Redis 4.0以后支持混合持久化
 
-## Redis过期策略
-
-Redis中可以为key设置有效期，当有效期过了之后，并不是立即删除。
-
-* volatile-lru -> Evict using approximated LRU among the keys with an expire set.从设置有效期的key中删除一个最久未使用的
-
-* allkeys-lru -> Evict any key using approximated LRU.从所有的key中删除一个最久未使用的
-
-* volatile-lfu -> Evict using approximated LFU among the keys with an expire set.从设置有效期的key中删除一个使用最少的
-
-* allkeys-lfu -> Evict any key using approximated LFU. 从所有key中删除一个最少使用的
-
-* volatile-random -> Remove a random key among the ones with an expire set.随机删除一个带有过期时间的key
-
-* allkeys-random -> Remove a random key, any key.从所有的key中进行随机删除
-
-* volatile-ttl -> Remove the key with the nearest expire time (minor TTL) 删除一个最接近过期时间的key
-
-* noeviction -> Don't evict anything, just return an error on write operations. 不进行删除，写的时候返回错误
-
-FIFI、LRU、LFU算法：
-
-https://www.cnblogs.com/hongdada/p/10406902.html
+## Redis删除策略
 
 ### 定期删除
 
@@ -612,7 +594,23 @@ Redis会为每个设置了过期时间的key放入一个独立的集合中，以
 
 因为缓存大部分都不能过期立即删除，那么就可能存在部分key过期了，还存在内存中，导致内存爆满，因此需要内存淘汰策略：
 
+Redis中可以为key设置有效期，当有效期过了之后，并不是立即删除。
 
+* **volatile-lru（least recently used）**：从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰
+* **volatile-ttl**：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰
+* **volatile-random**：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰
+* **allkeys-lru（least recently used）**：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 key（这个是最常用的）
+* **allkeys-random**：从数据集（server.db[i].dict）中任意选择数据淘汰
+* **no-eviction**：禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。这个应该没人使用吧！
+
+4.0 版本后增加以下两种：
+
+* **volatile-lfu（least frequently used）**：从已设置过期时间的数据集(server.db[i].expires)中挑选最不经常使用的数据淘汰
+* **allkeys-lfu（least frequently used）**：当内存不足以容纳新写入数据时，在键空间中，移除最不经常使用的 key
+
+FIFI、LRU、LFU算法：
+
+https://www.cnblogs.com/hongdada/p/10406902.html
 
 
 
