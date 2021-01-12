@@ -42,6 +42,7 @@
     <mappers>
         <mapper resource="mapper/PersonMapper.xml"></mapper>
         <mapper resource="mapper/StudentMapper.xml"></mapper>
+        <mapper resource="mapper/DataInsertMapper.xml"></mapper>
     </mappers>
 
 

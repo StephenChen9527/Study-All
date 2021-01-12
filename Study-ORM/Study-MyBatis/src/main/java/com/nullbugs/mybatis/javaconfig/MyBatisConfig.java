@@ -95,4 +95,34 @@ public class MyBatisConfig {
 
     }
 
+    @Test
+    public void insertIntoData(){
+        Map<String,Object> map = new HashMap<>();
+
+        for (int i = 0; i < 10000; i++) {
+            try {
+                String key1 = UUID.randomUUID().toString().replace("-","");
+                int key2 = new Random().nextInt(10000000);
+                String key3 = UUID.randomUUID().toString();
+                String key_part1 = UUID.randomUUID().toString().replace("-","").substring(0,12);
+                String key_part2 = UUID.randomUUID().toString().replace("-","").substring(0,12);
+                String key_part3 = UUID.randomUUID().toString().replace("-","").substring(0,12);
+                String common_field = UUID.randomUUID().toString().replace("-","").substring(0,12);
+                map.put("key1",key1);
+                map.put("key2",key2);
+                map.put("key3",key3);
+                map.put("key_part1",key_part1);
+                map.put("key_part2",key_part2);
+                map.put("key_part3",key_part3);
+                map.put("common_field",common_field);
+                session.insert("com.nullbugs.mybatis.mapper.DataInsertMapper.insertData",map);
+                session.commit();
+                System.out.println("success:"+i);
+            } catch (Exception e) {
+                System.out.println("失败");
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

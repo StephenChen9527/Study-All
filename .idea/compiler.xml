@@ -19,6 +19,7 @@
         <module name="Spring5" />
         <module name="Spring-boot2" />
         <module name="Study-Dubbo-springboot" />
+        <module name="Study-IDGenerator" />
         <module name="Study-Dubbo-SpringBoot-Provider" />
       </profile>
     </annotationProcessing>
