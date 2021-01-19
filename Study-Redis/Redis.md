@@ -354,7 +354,64 @@ Redis最开始是单机模式，只有一个节点对外提供服务
 在2.8版本以后引入`PSYNC` 命令来代替 `SYNC`，它具有两种模式：
 
 1. **全量复制：** 用于初次复制或其他无法进行部分复制的情况，将主节点中的所有数据都发送给从节点，是一个非常重型的操作；
+
+   >发生情况：初次连接Master节点或者断线重连时间过长
+   >
+   >初次连接Master，slave发送  psync {runId}  {offset}，runId是Master的pid，offset是复制偏移量，第一次格式为 `psync ? -1`，
+   >
+   >具体过程：
+   >
+   >1、当Master接收到这个命令就知道是一个全量复制，因此会将runId和 offset告知slave，回复命令`+fullResync {runId} {offset}`，同时，执行bgsave，生成rdb文件，并将生成rdb文件过程中的 写命令，记录到内存缓冲区中。
+   >
+   >2、发送rdb，同时继续记录命令
+   >
+   >3、发送完毕rdb，开始发送缓冲区的写命令
+   >
+   >4、slave接受rdb，先清空内存，然后加载rdb到内存，加载完毕，执行master缓冲区中的写命令
+   >
+   >5、至此同步结束，然后master每执行一个ie命令，就向slave发送相同的写命令
+
+![image-20210115142949889](img/image-20210115142949889.png)
+
 2. **部分复制：** 用于网络中断等情况后的复制，只将 **中断期间主节点执行的写命令** 发送给从节点，与全量复制相比更加高效。**需要注意** 的是，如果网络中断时间过长，导致主节点没有能够完整地保存中断期间执行的写命令，则无法进行部分复制，仍使用全量复制；
+
+>发生的情况：网络断开，命令丢失
+>
+>主从连接恢复后，同样会发送 `psync {runId} {offset}`，
+>
+>1、从节点重启，发起tcp请求，连接到Master，发送 `psync {runId} {offset}`命令，
+>
+>2、Master节点接受命令，判断runId，如果是自身，则发送`+CONTINUE`响应，表示可以进行部分复制，否则全量复制
+>
+>3、主节点根据偏移量，把缓冲区中的命令发送给从节点
+
+#### 注意事项
+
+```
+复制超时
+
+对于数据量较大的主节点，比如生成的RDB文件超过6GB以上时要格外小心。传输文件这一步操作非常耗时，速度取决于主从节点之间网络带宽，通过细致分析Full resync和MASTERSLAVE这两行日志的时间差，可以算出RDB文件从创建到传输完毕消耗的总时间。如果总时间超过repl-timeout所配置的值（默认60秒）,从节点将放弃接受RDB文件并清理已经下载的临时文件，导致全量复制失败。
+
+针对数据量较大的节点，建议调大repl-timeout参数防止出现全量同步数据超时。
+
+```
+
+```
+复制积压缓冲区溢出
+
+slave节点从开始接收RDB文件到接收完成期间，主节点仍然响应读写命令，因此主节点会把这期间写入命令保存在复制积压缓冲区内，当从节点加载完RDB文件后，主节点再把缓冲区内的数据发送给从节点，保证主从之间数据一致性。
+果主节点创建和传输RDB的时间过长，对于高流量写入场景非常容易造成主节点复制客户端缓冲区溢出。默认配置为client-output-buffer-limit slave 256MB 64MB 60，如果60秒内缓冲区消耗持续大于64MB或者直接超过256MB时，主节点将直接关闭复制客户端连接，造成全量同
+
+根据主节点数据量和写命令并发量调整client-output-buffer-limit slave配置，避免全量复制期间客户端缓冲区溢出。
+
+```
+
+
+作者：幕布斯6054654
+链接：https://www.imooc.com/article/264423
+来源：慕课网作者：幕布斯6054654
+链接：https://www.imooc.com/article/264423
+来源：慕课网
 
 ### Redis  Sentinel（哨兵模式）
 
@@ -652,7 +709,7 @@ ref https://baijiahao.baidu.com/s?id=1655304940308056733&wfr=spider&for=pc
 
 ref:
 
-
+https://blog.csdn.net/xiaoqiangyonghu/article/details/107949517
 
 https://www.wmyskxz.com/2020/03/17/redis-9-shi-shang-zui-qiang-ji-qun-ru-men-shi-jian-jiao-cheng/#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E6%BC%94%E7%A4%BA%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB
 

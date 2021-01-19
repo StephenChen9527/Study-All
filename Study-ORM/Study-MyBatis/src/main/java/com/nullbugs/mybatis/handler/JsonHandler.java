@@ -37,7 +37,7 @@ public class JsonHandler implements TypeHandler<Desci> {
         if(str!=null && !str.trim().equals("")){
             return JSONObject.parseObject(str, Desci.class);
         }
-
+        
         return null;
     }
 
