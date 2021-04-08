@@ -17,6 +17,7 @@
         <module>Study-ORM</module>
         <module>Study-Proxy</module>
         <module>Study-Distributed</module>
+        <module>Study-MQ</module>
     </modules>
     <packaging>pom</packaging>
     <dependencies>

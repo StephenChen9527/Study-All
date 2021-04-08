@@ -21,6 +21,7 @@
         <module name="Study-Dubbo-springboot" />
         <module name="Study-IDGenerator" />
         <module name="Study-Dubbo-SpringBoot-Provider" />
+        <module name="Study-MQ" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
